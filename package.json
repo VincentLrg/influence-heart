@@ -5,7 +5,7 @@
   "main": "dist/index.html",
   "scripts": {
     "dev": "rm -rf ./developement && rm -rf ./.parcel-cache && parcel serve ./src/html/index.html --dist-dir development -p 3000",
-    "build": "rm -rf ./dist && parcel build ./src/html/index.html --dist-dir dist"
+    "build": "rm -rf ./dist && parcel build ./src/html/index.html --dist-dir dist --public-url ./"
   },
   "keywords": [],
   "author": "VincentLrg",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "firebase": "^8.4.2",
     "pixi.js": "^6.0.2"
   }
 }
