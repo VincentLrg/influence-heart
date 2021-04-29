@@ -107,3 +107,7 @@ dist
 
 .parcel-cache/
 development/
+
+# Firebase files
+
+src/js/network/Firebase.config.js
