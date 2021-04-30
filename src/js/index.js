@@ -47,11 +47,13 @@ function gameLoop(delta) {
             _SCORE += 10
             console.log(_SCORE)
 
-            if (window.ReactNativeWebView)
-                window.ReactNativeWebView.postMessage({score: _SCORE, message: 'ReactNativeWebView'});
+            if (window.ReactNativeWebView){
+                window.ReactNativeWebView.postMessage(JSON.stringify({score: _SCORE, message: 'ReactNativeWebView'}));
+            }
 
-            if (window.postMessage)
-                window.postMessage({score: _SCORE, message: 'postMessage'});
+            if (window.postMessage) {
+                window.postMessage(JSON.stringify({score: _SCORE, message: 'postMessage'}));
+            }
         }
     }
 }
