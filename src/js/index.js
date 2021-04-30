@@ -78,7 +78,7 @@ const createHearts = () => {
 }
 
 const createMouth =  () => {
-    let mouth = new Mouth(200, 75, _WIDTH, _HEIGHT)
+    let mouth = new Mouth(200, 200, _WIDTH, _HEIGHT)
     app.stage.addChild(mouth.getSprite())
 }
 

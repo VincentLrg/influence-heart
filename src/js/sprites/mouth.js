@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js'
 
+import mouthImage from 'url:../../assets/img/mouth.png'
+
 class Mouth {
     constructor(width, height, widthWindow, heightWindow) {
         this.width = width
@@ -10,8 +12,7 @@ class Mouth {
         this.x = null
         this.y = null
 
-        this.sprite =  PIXI.Sprite.from(PIXI.Texture.WHITE)
-        this.sprite.tint = 0xFFFFFF;
+        this.sprite =  PIXI.Sprite.from(mouthImage)
 
         this.initDimension()
         this.initPosition()
