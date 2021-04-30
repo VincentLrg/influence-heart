@@ -14,7 +14,7 @@ let _HEIGHT = document.documentElement.clientHeight
 let _SCORE = 0
 
 let app = new PIXI.Application({
-    width: _WIDTH, 
+    width: _WIDTH,
     height: _HEIGHT,
     antialias: true,
     resolution: 1
@@ -46,6 +46,12 @@ function gameLoop(delta) {
             app.stage.removeChildAt(i)
             _SCORE += 10
             console.log(_SCORE)
+
+            if (window.ReactNativeWebView)
+                window.ReactNativeWebView.postMessage({score: _SCORE, message: 'ReactNativeWebView'});
+
+            if (window.postMessage)
+                window.postMessage({score: _SCORE, message: 'postMessage'});
         }
     }
 }
@@ -66,7 +72,7 @@ const createHearts = () => {
     for(let i = 0; i<20; i++) {
         let posX = Math.round(Math.random() * (_WIDTH - 34))
         let posY = Math.round(Math.random() * (_HEIGHT / 2 - 30))
-        
+
         let heart = new Heart(34, 30, posX, posY);
         heartArray.push(heart)
     }
