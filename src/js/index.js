@@ -1,6 +1,8 @@
 import "../scss/style.scss"
 import * as PIXI from 'pixi.js'
 
+import gsap from "gsap"
+
 import Heart from './sprites/heart'
 import Mouth from './sprites/mouth'
 
@@ -34,15 +36,15 @@ document.querySelector('.container').appendChild(app.view);
 //load an image and run the `setup` function when it's done
 //This `setup` function will run when the image has loaded
 function setup() {
-    createHearts()
     createMouth()
+    createHearts()
 
     app.ticker.add(gameLoop)
 }
 
 function gameLoop(delta) {
-    for(let i = 0; i<app.stage.children.length - 1; i++) {
-        if(intersect(app.stage.children[i], app.stage.children[app.stage.children.length-1])){
+    for(let i = 1; i<app.stage.children.length; i++) {
+        if(intersect(app.stage.children[i], app.stage.children[0])){
             app.stage.removeChildAt(i)
             _SCORE += 10
             console.log(_SCORE)
@@ -58,14 +60,20 @@ function gameLoop(delta) {
     }
 }
 
+function between(min, max) {  
+    return Math.floor(
+      Math.random() * (max - min) + min
+    )
+}
+
 const intersect = (elm, mouth) => {
     let elmBox = elm.getBounds()
     let mouthBox = mouth.getBounds()
 
-    return elmBox.x + elmBox.width > mouthBox.x &&
-           elmBox.x < mouthBox.x + mouthBox.width &&
-           elmBox.y + elmBox.height > mouthBox.y &&
-           elmBox.y < mouthBox.y + mouthBox.height
+    return elmBox.x + elmBox.width > mouthBox.x + mouthBox.width/2&&
+           elmBox.x < mouthBox.x + mouthBox.width/2 &&
+           elmBox.y + elmBox.height > mouthBox.y + mouthBox.height/2 &&
+           elmBox.y < mouthBox.y + mouthBox.height/2
 }
 
 const createHearts = () => {

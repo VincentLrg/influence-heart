@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "firebase": "^8.4.2",
+    "gsap": "^3.6.1",
     "pixi.js": "^6.0.2"
   }
 }
