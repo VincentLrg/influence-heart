@@ -14,9 +14,15 @@ class Heart {
 
         this.rdmNum = this.between(-10, 10)
 
+        this.randTranslate = this.between(0, 15)
+        this.randRotate = this.between(0, 1)
+        this.randOffset = this.between(0, 1)
+        this.randSpeed = this.between(1, 1.3)
+
         this.tl = gsap.timeline({repeat: -1})
 
         this.sprite =  PIXI.Sprite.from(heartImage)
+
 
         this.sprite.interactive = true
  
@@ -43,11 +49,34 @@ class Heart {
         this.sprite.height = this.height
     }
     initAnimation() {
-        this.tl.to(this.sprite, {duration: 0.5, x: this.sprite.x + (this.between(-2, 2)*this.rdmNum), y: this.sprite.y + (this.between(-2, 2)*this.rdmNum)})
-        this.tl.to(this.sprite, {duration: 0.5, x: this.sprite.x + (this.between(-1, 1)*this.rdmNum), y: this.sprite.y + (this.between(-1, 1)*this.rdmNum)})
-        this.tl.to(this.sprite, {duration: 0.5, x: this.sprite.x + (this.between(-2, 2)*this.rdmNum), y: this.sprite.y + (this.between(-2, 2)*this.rdmNum)})
-        this.tl.to(this.sprite, {duration: 0.5, x: this.sprite.x + (this.between(-1, 1)*this.rdmNum), y: this.sprite.y + (this.between(-1, 1)*this.rdmNum)})
-        this.tl.to(this.sprite, {duration: 0.5, x: this.sprite.x, y: this.sprite.y})
+
+        let rotation = -Math.PI * .3 + this.randRotate
+        let translationY = 50 + this.randTranslate
+
+        // translate y
+        this.tl.add(
+            gsap.to(this.sprite, {
+                y: this.sprite.y + translationY,
+                duration: 2 * this.randSpeed,
+                yoyo: true,
+                yoyoEase: "power1.inOut",
+                repeat: 1
+            }),
+            0
+        )
+
+        // rotate
+        this.tl.add(
+            gsap.to(this.sprite, {
+                rotation: rotation,
+
+                duration: 1 * this.randSpeed,
+                yoyo: true,
+                yoyoEase: "power1.inOut",
+                repeat: 1
+            }),
+            0
+        )
     }
     between(min, max) {  
         return Math.random() * (max - min) + min
@@ -61,10 +90,16 @@ class Heart {
         this.eventData = e.data;
         this.dragging = true;
         this.tl.pause();
-        this.sprite.width += 10;
-        this.sprite.height += 6;
-        this.sprite.x -= 5
-        this.sprite.y -= 3
+
+        gsap.to(this.sprite, {
+            duration: .2,
+
+            width: 34 + 10,
+            height: 30 + 6,
+            x: "-=5",
+            y: "-=3"
+        })
+
     }
     onDragEnd() {
         this.dragging = false;
@@ -72,10 +107,15 @@ class Heart {
         this.tl.clear()
         this.tl = gsap.timeline({repeat: -1})
         this.initAnimation()
-        this.sprite.width -= 10;
-        this.sprite.height -= 6;
-        this.sprite.x += 5
-        this.sprite.y += 3
+
+        gsap.to(this.sprite, {
+            duration: .2,
+
+            width: 34,
+            height: 30,
+            x: "+=5",
+            y: "+=3"
+        })
     }
     onDragMove(e){
         if (this.dragging) {
