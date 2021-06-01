@@ -1,5 +1,9 @@
 /* App base SCSS */
-
+.container {
+}
 canvas {
     display: block;
+    background-image: url("url:../assets/img/pattern.png");
+    background-size: cover;
+    background-position: center;
 }

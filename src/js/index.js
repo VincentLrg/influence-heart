@@ -22,7 +22,7 @@ let app = new PIXI.Application({
     resolution: 1
 });
 
-app.renderer.backgroundColor = 0x061639;
+app.renderer.backgroundAlpha = 0;
 app.renderer.autoResize = true;
 
 window.addEventListener('resize', e => {
