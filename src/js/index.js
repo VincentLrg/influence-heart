@@ -45,6 +45,8 @@ function setup() {
 function gameLoop(delta) {
     for(let i = 1; i<app.stage.children.length; i++) {
         if(intersect(app.stage.children[i], app.stage.children[0])){
+            app.stage.children[0].gotoAndPlay(0)
+
             app.stage.removeChildAt(i)
             _SCORE += 10
             console.log(_SCORE)
@@ -60,20 +62,14 @@ function gameLoop(delta) {
     }
 }
 
-function between(min, max) {  
-    return Math.floor(
-      Math.random() * (max - min) + min
-    )
-}
-
 const intersect = (elm, mouth) => {
     let elmBox = elm.getBounds()
     let mouthBox = mouth.getBounds()
 
-    return elmBox.x + elmBox.width > mouthBox.x + mouthBox.width/2&&
-           elmBox.x < mouthBox.x + mouthBox.width/2 &&
-           elmBox.y + elmBox.height > mouthBox.y + mouthBox.height/2 &&
-           elmBox.y < mouthBox.y + mouthBox.height/2
+    return elmBox.x + elmBox.width > mouthBox.x + mouthBox.width/3 &&
+           elmBox.x < mouthBox.x + mouthBox.width/1.5 &&
+           elmBox.y + elmBox.height > mouthBox.y + mouthBox.height/3 &&
+           elmBox.y < mouthBox.y + mouthBox.height/1.5
 }
 
 const createHearts = () => {

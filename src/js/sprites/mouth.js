@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js'
-
-import mouthImage from 'url:../../assets/img/mouth.png'
+import mouthImages from './import_mouth'
 
 class Mouth {
     constructor(width, height, widthWindow, heightWindow) {
@@ -12,7 +11,8 @@ class Mouth {
         this.x = null
         this.y = null
 
-        this.sprite =  PIXI.Sprite.from(mouthImage)
+        this.sprite = undefined
+        this.initSprite()
 
         this.initDimension()
         this.initPosition()
@@ -21,6 +21,14 @@ class Mouth {
     getSprite() {
         return this.sprite
     }
+
+    initSprite() {
+        this.sprite = new PIXI.AnimatedSprite.fromFrames(mouthImages);
+        this.sprite.loop = false
+        this.sprite.animationSpeed = 0.85; 
+        console.log(this.sprite)
+    }
+
     initDimension() {
         this.sprite.width = this.width
         this.sprite.height = this.height
